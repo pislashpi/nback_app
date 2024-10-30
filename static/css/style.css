@@ -1,0 +1,34 @@
+body {
+    background-color: white;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+#stimulus-area {
+    font-size: 64px;
+    margin-top: 200px;
+    z-index: 1;
+}
+
+#distractor-area {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    z-index: 0;
+}
+
+.distractor-image {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: -50px;
+}
+
+.distractor-image.left {
+    left: 10%;
+}
+
+.distractor-image.right {
+    right: 10%;
+}

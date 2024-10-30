@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>N-backタスク設定</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        function updateElementSelection() {
+            const elements = document.querySelectorAll('input[name="elements"]');
+            const selectedElements = [];
+            elements.forEach(elem => {
+                if (elem.checked) {
+                    selectedElements.push(elem.value);
+                }
+            });
+
+            // 組み合わせのルールに従って制御
+            elements.forEach(elem => {
+                elem.disabled = false; // 一旦すべて有効化
+
+                // 単語、記号、文字、数字は色とセットなので、色が選択されていないと選べないようにする
+                if (['words', 'symbols', 'characters', 'numbers'].includes(elem.value)) {
+                    if (!selectedElements.includes('colors')) {
+                        elem.disabled = true;
+                        elem.checked = false;
+                    }
+                }
+
+                // 顔と表情はセット、それ以外とは組み合わせ不可
+                if (elem.value === 'faces') {
+                    if (selectedElements.length > 1 && !selectedElements.includes('faces')) {
+                        elem.disabled = true;
+                        elem.checked = false;
+                    }
+                }
+
+                // 色を表す単語は単体でのみ選択可能
+                if (elem.value === 'color_words') {
+                    if (selectedElements.length > 1 && !selectedElements.includes('color_words')) {
+                        elem.disabled = true;
+                        elem.checked = false;
+                    }
+                }
+
+                // 色が選択されている場合、単語、記号、文字、数字のみ選択可能
+                if (selectedElements.includes('colors') && !['words', 'symbols', 'characters', 'numbers', 'colors'].includes(elem.value)) {
+                    if (elem.value !== 'colors') {
+                        elem.disabled = true;
+                        elem.checked = false;
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>N-backタスク設定</h1>
+    <form method="post">
+        <label>ユーザー名: <input type="text" name="username" required></label><br>
+        <label>Nの設定 (1-9): <input type="number" name="n" min="1" max="9" value="1" required></label><br>
+        <label>判定個数: <input type="number" name="num_trials" min="1" value="10" required></label><br>
+        <label>表示時間(ms 300-1000): <input type="number" name="display_time" min="300" max="2500" value="2000" required></label><br>
+        <label>インターバル時間(ms 200-1000): <input type="number" name="interval_time" min="300" max="2500" value="1500" required></label><br>
+        <p>要素を選択（組み合わせのルールに従ってください）:</p>
+        <label><input type="checkbox" name="elements" value="colors" onchange="updateElementSelection()"> 色</label><br>
+        <label><input type="checkbox" name="elements" value="color_words" onchange="updateElementSelection()"> 色名（単体選択のみ）</label><br>
+        <label><input type="checkbox" name="elements" value="symbols" onchange="updateElementSelection()"> 記号（色とセット）</label><br>
+        <label><input type="checkbox" name="elements" value="words" onchange="updateElementSelection()"> 単語（色とセット）</label><br>
+        <label><input type="checkbox" name="elements" value="characters" onchange="updateElementSelection()"> 文字（色とセット）</label><br>
+        <label><input type="checkbox" name="elements" value="numbers" onchange="updateElementSelection()"> 数字（色とセット）</label><br>
+        <label><input type="checkbox" name="elements" value="faces" onchange="updateElementSelection()"> 顔と表情（単体選択のみ）</label><br>
+        <label>邪魔な画像を表示: <input type="checkbox" name="distractor" value="1"></label><br>
+        <button type="submit">タスク開始</button>
+    </form>
+    <script>
+        updateElementSelection(); // ページ読み込み時に初期化
+    </script>
+</body>
+</html>

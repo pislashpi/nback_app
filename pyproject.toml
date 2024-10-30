@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "nback-app"
+version = "0.1.0"
+description = "N-backタスクとその記録を行うWebアプリケーション"
+authors = ["pislashpi <123241027+pislashpi@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+Flask = "^3.0.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

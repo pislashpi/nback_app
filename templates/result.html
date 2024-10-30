@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>結果</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>タスク結果</h1>
+    <p>正答Aの数: {{ result.correct_a }}</p>
+    <p>正答Bの数: {{ result.correct_b }}</p>
+    <p>誤答Aの数: {{ result.incorrect_a }}</p>
+    <p>誤答Bの数: {{ result.incorrect_b }}</p>
+    <p>正答率: {{ result.accuracy }}%</p>
+    <p>誤答率: {{ result.error_rate }}%</p>
+    <button onclick="window.location.href='/'">タスク設定に戻る</button>
+    <button onclick="window.location.href='/task'">再タスクを受ける</button>
+</body>
+</html>

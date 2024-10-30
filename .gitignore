@@ -1,0 +1,33 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Database
+*.db
+*.sqlite3
+
+# Environment variables
+.env
+
+# Pytest cache
+.pytest_cache/
+
+# MyPy cache
+.mypy_cache/
+
+# Virtual environments
+env/
+venv/
+ENV/
+
+# Poetry
+poetry.lock
+
+# Docker
+*.pyc
+.DS_Store
+docker-compose.yml

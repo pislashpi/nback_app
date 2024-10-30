@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>N-backタスク</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        var stimuliList = {{ stimuli_list|tojson }};
+        var displayTime = {{ display_time }};
+        var intervalTime = {{ interval_time }};
+        var distractor = {{ distractor }};
+    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+    <div id="stimulus-area"></div>
+    <div id="distractor-area"></div>
+</body>
+</html>
